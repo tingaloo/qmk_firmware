@@ -299,6 +299,14 @@ bool oled_task_user(void) {
 bool encoder_update_user(uint8_t index, bool clockwise) {
 
     if (index == 0) {
+
+        if (clockwise) {
+  tap_code16(C(KC_Y));
+} else {
+  tap_code16(C(KC_Z));
+}
+
+    } else if (index == 1) {
         // window tab control
 if (clockwise) {
   if (!is_alt_tab_active) {
@@ -314,13 +322,6 @@ if (clockwise) {
   }
   alt_tab_timer = timer_read();
   tap_code16(S(KC_TAB));
-}
-    } else if (index == 1) {
-        // window tabbing control
-if (clockwise) {
-  tap_code16(C(KC_TAB));
-} else {
-  tap_code16(S(C(KC_TAB)));
 }
     }
     return false;
